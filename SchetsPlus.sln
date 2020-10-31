@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "plswork", "plswork.csproj", "{CE4E72D5-61F0-44A6-B380-FC01E2F5096B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchetsPlus", "SchetsPlus.csproj", "{CE4E72D5-61F0-44A6-B380-FC01E2F5096B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
