@@ -1,0 +1,7 @@
+D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\SchetsPlus\bin\Debug\Schets.exe
+D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\SchetsPlus\bin\Debug\Schets.pdb
+D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\SchetsPlus\obj\x86\Debug\plswork.Properties.Resources.resources
+D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\SchetsPlus\obj\x86\Debug\SchetsPlus.csproj.GenerateResource.cache
+D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\SchetsPlus\obj\x86\Debug\SchetsPlus.csproj.CoreCompileInputs.cache
+D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\SchetsPlus\obj\x86\Debug\Schets.exe
+D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\SchetsPlus\obj\x86\Debug\Schets.pdb
