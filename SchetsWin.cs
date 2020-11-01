@@ -48,7 +48,8 @@ namespace plswork
                                     , new RechthoekTool()
                                     , new VolRechthoekTool()
                                     , new TekstTool()
-                                    , new GumTool()
+                                    , new GumTool(),
+                                    new CircleTool()
                                     };
             String[] deKleuren = { "Black", "Red", "Green", "Blue"
                                  , "Yellow", "Magenta", "Cyan"
