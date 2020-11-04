@@ -20,9 +20,11 @@ namespace PaintPoging
         }
 
 
-        public PaintingControl()
+        public PaintingControl(Control parent)
         {
-            p = new Painting();
+            this.Parent = parent;
+            this.Size = this.Parent.ClientSize;
+            p = new Painting(this.Parent.ClientSize);
             this.Paint += this.Repaint;
             this.Resize += this.SizeChanged;
         }

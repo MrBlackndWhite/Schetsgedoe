@@ -1,7 +1,6 @@
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\bin\Debug\PaintPoging.exe.config
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\bin\Debug\PaintPoging.exe
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\bin\Debug\PaintPoging.pdb
-D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\obj\Debug\PaintPoging.csprojAssemblyReference.cache
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\obj\Debug\PaintPoging.MainForm.resources
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\obj\Debug\PaintPoging.Properties.Resources.resources
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\obj\Debug\PaintPoging.csproj.GenerateResource.cache
@@ -9,3 +8,4 @@ D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\o
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\obj\Debug\PaintPoging.exe
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\obj\Debug\PaintPoging.pdb
 D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\obj\Debug\PaintPoging.ChildForm.resources
+D:\StackStorage\school\Utrecht Jaar 1 Inf\INFOIMP\VisTudioProjects\PaintPoging\obj\Debug\PaintPoging.csprojAssemblyReference.cache

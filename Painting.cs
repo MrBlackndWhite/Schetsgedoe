@@ -7,9 +7,9 @@ namespace PaintPoging
     public class Painting
     {
         private Bitmap bmp;
-        public Painting()
+        public Painting(Size s)
         {
-            bmp = new Bitmap(1, 1);
+            bmp = new Bitmap(s.Width, s.Height);
         }
         public Graphics BmpGraphics
         {

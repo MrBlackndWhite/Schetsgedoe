@@ -1,9 +1,37 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 
 namespace PaintPoging
 {
+    public enum ToolEnum
+    {
+        Pen = 0,
+        Line = 1,
+        Rectangle = 2,
+        FillRectangle = 3,
+        Text = 4,
+        Eraser = 5,
+        Circle = 6
+    }
+
+    public static class Tools
+    {
+        public static IPaintTool[] CreateAllTools()
+        {
+            IPaintTool[] tools = {
+                new PenTool(),
+                new LineTool(),
+                new RecTool(),
+                new FillRecTool(),
+                new TxTool(),
+                new EraserTool(),
+                new CircleTool()
+            };
+            return tools;
+        }
+    }
 
     public interface IPaintTool
     {
@@ -32,7 +60,7 @@ namespace PaintPoging
 
     public class TxTool : OnePTool
     {
-        public override string ToString() { return "tekst"; }
+        public override string ToString() { return "text"; }
 
         public override void MBDrag(PaintingControl s, Point p) { }
 
@@ -146,7 +174,7 @@ namespace PaintPoging
         }
     }
 
-    public class GumTool : PenTool
+    public class EraserTool : PenTool
     {
         public override string ToString() { return "eraser"; }
 
