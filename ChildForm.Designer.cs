@@ -42,12 +42,12 @@
             this.TSitm_Rectangle = new System.Windows.Forms.ToolStripButton();
             this.TSitm_FillRectangle = new System.Windows.Forms.ToolStripButton();
             this.TSitm_Text = new System.Windows.Forms.ToolStripButton();
-            this.TSitm_Eraser = new System.Windows.Forms.ToolStripButton();
             this.TSitm_Circle = new System.Windows.Forms.ToolStripButton();
             this.TSitm_fillCircle = new System.Windows.Forms.ToolStripButton();
+            this.lbl_elements = new System.Windows.Forms.Label();
             this.childFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.childFormBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.lbl_elements = new System.Windows.Forms.Label();
+            this.TSitm_Eraser = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.SplitPanel_LR)).BeginInit();
             this.SplitPanel_LR.Panel1.SuspendLayout();
             this.SplitPanel_LR.Panel2.SuspendLayout();
@@ -102,7 +102,8 @@
             this.TS_Bottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSitm_clear,
             this.TSitm_rotate,
-            this.TSitm_select});
+            this.TSitm_select,
+            this.TSitm_Eraser});
             this.TS_Bottom.Location = new System.Drawing.Point(0, 461);
             this.TS_Bottom.Name = "TS_Bottom";
             this.TS_Bottom.Size = new System.Drawing.Size(692, 27);
@@ -130,7 +131,6 @@
             // TSitm_select
             // 
             this.TSitm_select.BackColor = System.Drawing.Color.White;
-            this.TSitm_select.CheckOnClick = true;
             this.TSitm_select.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TSitm_select.ForeColor = System.Drawing.Color.Gold;
             this.TSitm_select.Image = global::PaintPoging.Properties.Resources.text;
@@ -150,7 +150,6 @@
             this.TSitm_Rectangle,
             this.TSitm_FillRectangle,
             this.TSitm_Text,
-            this.TSitm_Eraser,
             this.TSitm_Circle,
             this.TSitm_fillCircle});
             this.TS_Top.Location = new System.Drawing.Point(0, 0);
@@ -225,20 +224,6 @@
             this.TSitm_Text.Tag = "text";
             this.TSitm_Text.Text = "Text";
             // 
-            // TSitm_Eraser
-            // 
-            this.TSitm_Eraser.BackColor = System.Drawing.Color.White;
-            this.TSitm_Eraser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.TSitm_Eraser.CheckOnClick = true;
-            this.TSitm_Eraser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TSitm_Eraser.ForeColor = System.Drawing.Color.Gold;
-            this.TSitm_Eraser.Image = global::PaintPoging.Properties.Resources.eraser;
-            this.TSitm_Eraser.ImageTransparentColor = System.Drawing.Color.MediumSeaGreen;
-            this.TSitm_Eraser.Name = "TSitm_Eraser";
-            this.TSitm_Eraser.Size = new System.Drawing.Size(29, 24);
-            this.TSitm_Eraser.Tag = "eraser";
-            this.TSitm_Eraser.Text = "Eraser";
-            // 
             // TSitm_Circle
             // 
             this.TSitm_Circle.BackColor = System.Drawing.Color.White;
@@ -267,14 +252,6 @@
             this.TSitm_fillCircle.Text = "Fill Circle";
             this.TSitm_fillCircle.ToolTipText = "Fill Circle";
             // 
-            // childFormBindingSource
-            // 
-            this.childFormBindingSource.DataSource = typeof(PaintPoging.ChildForm);
-            // 
-            // childFormBindingSource1
-            // 
-            this.childFormBindingSource1.DataSource = typeof(PaintPoging.ChildForm);
-            // 
             // lbl_elements
             // 
             this.lbl_elements.AutoSize = true;
@@ -286,6 +263,27 @@
             this.lbl_elements.Size = new System.Drawing.Size(126, 20);
             this.lbl_elements.TabIndex = 2;
             this.lbl_elements.Text = "Current Layers:";
+            // 
+            // childFormBindingSource
+            // 
+            this.childFormBindingSource.DataSource = typeof(PaintPoging.ChildForm);
+            // 
+            // childFormBindingSource1
+            // 
+            this.childFormBindingSource1.DataSource = typeof(PaintPoging.ChildForm);
+            // 
+            // TSitm_Eraser
+            // 
+            this.TSitm_Eraser.BackColor = System.Drawing.Color.White;
+            this.TSitm_Eraser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TSitm_Eraser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TSitm_Eraser.ForeColor = System.Drawing.Color.Gold;
+            this.TSitm_Eraser.Image = global::PaintPoging.Properties.Resources.eraser;
+            this.TSitm_Eraser.ImageTransparentColor = System.Drawing.Color.MediumSeaGreen;
+            this.TSitm_Eraser.Name = "TSitm_Eraser";
+            this.TSitm_Eraser.Size = new System.Drawing.Size(29, 24);
+            this.TSitm_Eraser.Tag = "eraser";
+            this.TSitm_Eraser.Text = "Eraser";
             // 
             // ChildForm
             // 
@@ -324,12 +322,12 @@
         private System.Windows.Forms.ToolStripButton TSitm_Rectangle;
         private System.Windows.Forms.ToolStripButton TSitm_FillRectangle;
         private System.Windows.Forms.ToolStripButton TSitm_Text;
-        private System.Windows.Forms.ToolStripButton TSitm_Eraser;
         private System.Windows.Forms.ToolStripButton TSitm_Circle;
         private System.Windows.Forms.ToolStripButton TSitm_fillCircle;
         protected System.Windows.Forms.ListBox LB_elements;
         private System.Windows.Forms.BindingSource childFormBindingSource;
         private System.Windows.Forms.BindingSource childFormBindingSource1;
         private System.Windows.Forms.Label lbl_elements;
+        private System.Windows.Forms.ToolStripButton TSitm_Eraser;
     }
 }

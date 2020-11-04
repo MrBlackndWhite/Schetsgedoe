@@ -40,6 +40,30 @@ namespace PaintPoging
             p.ElementCompleted(color);
         }
 
+        public void DeleteElement(string name)
+        {
+            for (int i = 0; i < painting.elements.Count; i++)
+            {
+                if (painting.elements[i].Name == name)
+                {
+                    painting.elements.RemoveAt(i);
+                    return;
+                }
+            }
+        }
+
+        public PaintingElement FindElement(string name)
+        {
+            for (int i = 0; i < painting.elements.Count; i++)
+            {
+                if (painting.elements[i].Name == name)
+                {
+                    return painting.elements[i];
+                }
+            }
+            return new PaintingElement();
+        }
+
         public void StartPointActive(ToolEnum te, Point p)
         {
             this.p.CurrentlyDrawing = new PaintingElement(te, p, p);

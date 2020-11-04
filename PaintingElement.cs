@@ -14,6 +14,11 @@ namespace PaintPoging
         public Color color { get; set; }
         public string Name { get; set; } //name of specified element
 
+        public PaintingElement()
+        {
+            Type = ToolEnum.None;
+            Name = "";
+        }
         public PaintingElement(ToolEnum type)
         {
             this.Type = type;
@@ -126,6 +131,53 @@ namespace PaintPoging
                     break;
                 default:
                     break;
+            }
+        }
+
+        public bool ContainsPoint(Point p, int maxOffset)
+        {
+            switch (this.Type)
+            {
+                case ToolEnum.None:
+                    return false;
+                case ToolEnum.Pen:
+                    foreach (Point point in points)
+                    {
+
+                    }
+                    return false;
+                case ToolEnum.Line:
+                    return false;
+                case ToolEnum.Rectangle:
+                    Size sz = new Size(maxOffset, maxOffset);
+                    Rectangle r1 = TwoPTool.CreateRectangle(points.ElementAt(0) - sz, 
+                                                            points.ElementAt(1) + sz);
+                    Rectangle r2 = TwoPTool.CreateRectangle(points.ElementAt(0) + sz,
+                                        points.ElementAt(1) - sz);
+                    if (r1.Contains(p) && (!r2.Contains(p)))
+                    {
+                        return true;
+                    }
+                    return false;
+                case ToolEnum.FillRectangle:
+                    if (TwoPTool.CreateRectangle(points.ElementAt(0),points.ElementAt(1)).Contains(p))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                case ToolEnum.Text:
+                    return false;
+                case ToolEnum.Eraser:
+                    return false;
+                case ToolEnum.Circle:
+                    return false;
+                case ToolEnum.FillCircle:
+                    return false;
+                default:
+                    return false;
             }
         }
     }

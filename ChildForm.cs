@@ -11,8 +11,10 @@ namespace PaintPoging
         private PaintingControl pc;
         private Color currentColor { get; set; } = Color.Red;
         private ToolEnum currentToolEnum;
+        private int offSet = 10;
         //private IPaintTool currenTool;
         private bool isMouseDown = false;
+        private PaintingElement Selected;
         //private ResourceManager rsm = new ResourceManager("PaintPoging.Properties.Resources",
         //    Assembly.GetExecutingAssembly());
         //private IPaintTool[] tools { get; } = Tools.CreateAllTools();
@@ -34,11 +36,37 @@ namespace PaintPoging
             //pc.KeyPress += this.Pc_KeyPress;
             this.SplitPanel_LR.Panel2.Controls.Add(pc);
             TSitm_clear.Click += pc.Clear;
-            TSitm_select.Click += this.Select;
+            TSitm_select.Click += this.SelectTool;
+            TSitm_Eraser.Click += this.EraseSelected;
+            LB_elements.SelectedValueChanged += this.OnSelectFromList;
             this.Resize += this.SizeChanged;
         }
 
-        private void Select(object sender, EventArgs e)
+        private void OnSelectFromList(object sender, EventArgs e)
+        {
+            SelectTool(null, null); //deselect all other tools
+            if (LB_elements.SelectedIndex > -1)
+            {
+                Selected = pc.FindElement((String)LB_elements.Items[LB_elements.SelectedIndex]);
+            }
+        }
+
+        private void EraseSelected(object sender, EventArgs e)
+        {
+            if (Selected != null && Selected.Type != ToolEnum.None)
+            {
+                pc.DeleteElement(Selected.Name);
+                Selected = new PaintingElement();
+                pc.Invalidate();
+                UpdateListBox();
+            }
+            else
+            {
+                MessageBox.Show("Please select a layer to delete before pressing the EraserTool.");
+            }
+        }
+
+        private void SelectTool(object sender, EventArgs e)
         {
             foreach (ToolStripButton b in TSButtons)
             {
@@ -66,18 +94,22 @@ namespace PaintPoging
                     currenTool.Letter(pc, e.KeyChar);
                 }*/
 
-        private void Pc_MouseUp(object sender, MouseEventArgs e)
+        private void Pc_MouseUp(object o, MouseEventArgs e)
         {
-            pc.ElementCompleted(currentColor);
-            //currenTool.MBUp(pc, e.Location);
-            isMouseDown = false;
-            UpdateListBox();
-            pc.Invalidate();
+            if (currentToolEnum != ToolEnum.None)
+            {
+                pc.ElementCompleted(currentColor);
+                //currenTool.MBUp(pc, e.Location);
+                isMouseDown = false;
+                UpdateListBox();
+                pc.Invalidate();
+            }
+
         }
 
-        private void Pc_MouseMove(object sender, MouseEventArgs e)
+        private void Pc_MouseMove(object o, MouseEventArgs e)
         {
-            if (isMouseDown)
+            if (isMouseDown && currentToolEnum != ToolEnum.None)
             {
                 pc.EndPointActive(e.Location);
                 //currenTool.MBDrag(pc, e.Location);
@@ -85,11 +117,50 @@ namespace PaintPoging
             }
         }
 
-        private void Pc_MouseDown(object sender, MouseEventArgs e)
+        private void Pc_MouseDown(object o, MouseEventArgs e)
         {
-            isMouseDown = true;
-            pc.StartPointActive(currentToolEnum, e.Location);
+            if (currentToolEnum == ToolEnum.None)
+            {
+                SelectCheck(o, e);
+                return;
+            }
+            else
+            {
+                isMouseDown = true;
+                pc.StartPointActive(currentToolEnum, e.Location);
+            }
             //currenTool.MBDown(pc, e.Location);
+        }
+
+        private void SelectCheck(object o, MouseEventArgs e)
+        {
+            for (int i = pc.painting.elements.Count-1; i >= 0; i--)
+            {
+                if (pc.painting.elements[i].ContainsPoint(e.Location,offSet))
+                {
+                    this.Selected = pc.painting.elements[i];
+                    OnSelectFromPC();
+                    return;
+                }
+            }
+            LB_elements.ClearSelected();
+        }
+
+        private void OnSelectFromPC()
+        {
+            String element;
+            for (int i = 0; i < LB_elements.Items.Count; i++)
+            {
+                element = (String)LB_elements.Items[i];
+                if (element == Selected.Name)
+                {
+                    LB_elements.SetSelected(i, true);
+                }
+                else
+                {
+                    LB_elements.SetSelected(i, false);
+                }
+            }
         }
 
         private void SetToolTags()
@@ -102,6 +173,7 @@ namespace PaintPoging
             this.TSitm_Circle.Tag = ToolEnum.Circle;
             this.TSitm_Eraser.Tag = ToolEnum.Eraser;
             this.TSitm_fillCircle.Tag = ToolEnum.FillCircle;
+            this.TSitm_select.Tag = ToolEnum.None;
         }
 
         private void SetToolEventHandlers()
