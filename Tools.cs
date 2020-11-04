@@ -7,6 +7,7 @@ namespace PaintPoging
 {
     public enum ToolEnum
     {
+        None = -1,
         Pen = 0,
         Line = 1,
         Rectangle = 2,
@@ -17,8 +18,8 @@ namespace PaintPoging
         FillCircle = 7
     }
 
-    public static class Tools
-    {
+    public static class Tools { }
+  /*  {
         public static IPaintTool[] CreateAllTools()
         {
             IPaintTool[] tools = {
@@ -33,7 +34,7 @@ namespace PaintPoging
             };
             return tools;
         }
-    }
+    }*/
 
     public interface IPaintTool
     {
@@ -126,44 +127,8 @@ namespace PaintPoging
         }
     }
 
-    public class RecTool : TwoPTool
-    {
-        public override string ToString() { return "rect"; }
 
-        public override PaintingElement Active(Graphics g, Point p1, Point p2)
-        {
-            return new PaintingElement(ToolEnum.Rectangle, p1, p2);
-        }
-    }
-    public class CircleTool : TwoPTool
-    {
-        public override string ToString() { return "circle"; }
 
-        public override PaintingElement Active(Graphics g, Point p1, Point p2)
-        {
-            return new PaintingElement(ToolEnum.Circle, p1, p2);
-        }
-    }
-
-    public class FillRecTool : RecTool
-    {
-        public override string ToString() { return "fillrect"; }
-
-        public override PaintingElement Finished(Graphics g, Point p1, Point p2)
-        {
-            return new PaintingElement(ToolEnum.FillRectangle, p1, p2);
-        }
-    }
-
-    public class FillCircleTool : CircleTool
-    {
-        public override string ToString() { return "fillcircle"; }
-
-        public override PaintingElement Finished(Graphics g, Point p1, Point p2)
-        {
-            return new PaintingElement(ToolEnum.FillCircle, p1, p2);
-        }
-    }
 
     public class LineTool : TwoPTool
     {

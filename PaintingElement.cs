@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 
 namespace PaintPoging
 {
     public class PaintingElement
     {
-        private ToolEnum Type { get; set; } //type of drawing
-        public Point[] points { get; set; } = new Point[2];
+        public ToolEnum Type { get; set; } //type of drawing
+        public List<Point> points { get; set; } = new List<Point>();
         public int priority { get; set; } = 0;
         public Color color { get; set; }
         public string Name { get; set; } //name of specified element
@@ -44,8 +45,8 @@ namespace PaintPoging
         public PaintingElement(ToolEnum type, Point p1, Point p2)
         {
             this.Type = type;
-            this.points[0] = p1;
-            this.points[1] = p2;
+            this.points.Add(p1);
+            this.points.Add(p2);
         }        
         public PaintingElement(ToolEnum type, string name)
         {
@@ -99,6 +100,10 @@ namespace PaintPoging
             switch (Type)
             {
                 case ToolEnum.Pen:
+                    for (int i = 0; i < points.Count-1; i++)
+                    {
+                        g.DrawLine(p, points.ElementAt(i), points.ElementAt(i+1));
+                    }
                     break;
                 case ToolEnum.Line:
                     g.DrawLine(p, points[0], points[1]);

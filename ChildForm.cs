@@ -11,11 +11,11 @@ namespace PaintPoging
         private PaintingControl pc;
         private Color currentColor { get; set; } = Color.Red;
         private ToolEnum currentToolEnum;
-        private IPaintTool currenTool;
+        //private IPaintTool currenTool;
         private bool isMouseDown = false;
         //private ResourceManager rsm = new ResourceManager("PaintPoging.Properties.Resources",
         //    Assembly.GetExecutingAssembly());
-        private IPaintTool[] tools { get; } = Tools.CreateAllTools();
+        //private IPaintTool[] tools { get; } = Tools.CreateAllTools();
         private List<ToolStripButton> TSButtons { get; set; } = new List<ToolStripButton>();
 
 
@@ -25,29 +25,53 @@ namespace PaintPoging
             SetToolTags();
             SetToolEventHandlers();
 
-            currenTool = tools[(int)ToolEnum.Pen];
+            //currenTool = tools[(int)ToolEnum.Pen];
             pc = new PaintingControl(this.SplitPanel_LR.Panel2);
 
             pc.MouseDown += this.Pc_MouseDown;
             pc.MouseMove += this.Pc_MouseMove;
             pc.MouseUp += this.Pc_MouseUp;
-            pc.KeyPress += this.Pc_KeyPress;
+            //pc.KeyPress += this.Pc_KeyPress;
             this.SplitPanel_LR.Panel2.Controls.Add(pc);
             TSitm_clear.Click += pc.Clear;
+            TSitm_select.Click += this.Select;
             this.Resize += this.SizeChanged;
         }
 
-        private void Pc_KeyPress(object sender, KeyPressEventArgs e)
+        private void Select(object sender, EventArgs e)
         {
-            currenTool.Letter(pc, e.KeyChar);
+            foreach (ToolStripButton b in TSButtons)
+            {
+                b.Checked = false;
+                b.CheckState = CheckState.Unchecked;
+            }
+            currentToolEnum = ToolEnum.None;
+            TS_Top.Invalidate();
         }
+
+        private void UpdateListBox()
+        {
+            LB_elements.BeginUpdate();
+            LB_elements.Items.Clear();
+            foreach (PaintingElement e in pc.painting.elements)
+            {
+                LB_elements.Items.Add(e.Name.ToString());
+            }
+            LB_elements.EndUpdate();
+            LB_elements.Invalidate();
+        }
+
+        /*        private void Pc_KeyPress(object sender, KeyPressEventArgs e)
+                {
+                    currenTool.Letter(pc, e.KeyChar);
+                }*/
 
         private void Pc_MouseUp(object sender, MouseEventArgs e)
         {
             pc.ElementCompleted(currentColor);
             //currenTool.MBUp(pc, e.Location);
             isMouseDown = false;
-            Console.WriteLine("mup");
+            UpdateListBox();
             pc.Invalidate();
         }
 
@@ -57,7 +81,6 @@ namespace PaintPoging
             {
                 pc.EndPointActive(e.Location);
                 //currenTool.MBDrag(pc, e.Location);
-                Console.WriteLine("mdrag");
                 pc.Invalidate();
             }
         }
@@ -67,7 +90,6 @@ namespace PaintPoging
             isMouseDown = true;
             pc.StartPointActive(currentToolEnum, e.Location);
             //currenTool.MBDown(pc, e.Location);
-            Console.WriteLine("mdown");
         }
 
         private void SetToolTags()
@@ -84,19 +106,15 @@ namespace PaintPoging
 
         private void SetToolEventHandlers()
         {
-            foreach (ToolStripItem item in TS_Top.Items)
+            foreach (ToolStripButton item in TS_Top.Items)
             {
-                if (!(item is ToolStripSeparator))
-                {
-                    ToolStripButton temp = item as ToolStripButton;
-                    // mousedown => checkedchanged => checkstatechanged => click => mouseup
-                    temp.CheckStateChanged += this.ToolCheckStateChanged;
-                    item.Click += this.ToolClicked;         //button.checked al veranderd
-                    this.TSButtons.Add((ToolStripButton)item);
-                }
+                ToolStripButton temp = item as ToolStripButton;
+                // mousedown => checkedchanged => checkstatechanged => click => mouseup
+                temp.CheckStateChanged += this.ToolCheckStateChanged;
+                item.Click += this.ToolClicked;         //button.checked al veranderd
+                this.TSButtons.Add((ToolStripButton)item);
             }
         }
-
         private new void SizeChanged(object o, EventArgs e)
         {
             pc.Size = SplitPanel_LR.Panel2.ClientSize;
@@ -105,7 +123,7 @@ namespace PaintPoging
         private void ToolClicked(object o, EventArgs e)
         {
             ToolStripButton btn = o as ToolStripButton;
-            currenTool = tools.ElementAt((int)(ToolEnum)btn.Tag);
+            //currenTool = tools.ElementAt((int)(ToolEnum)btn.Tag);
             currentToolEnum = (ToolEnum)btn.Tag;
             foreach (ToolStripButton item in this.TSButtons)
             {

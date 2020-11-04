@@ -46,7 +46,14 @@ namespace PaintPoging
         }
         public void EndPointActive(Point p2)
         {
-            this.p.CurrentlyDrawing.points[1] = p2;
+            if (this.p.CurrentlyDrawing.Type == ToolEnum.Pen)
+            {
+                this.p.CurrentlyDrawing.points.Add(p2);
+            }
+            else
+            {
+                this.p.CurrentlyDrawing.points[1] = p2;
+            }
         }
 
         private new void SizeChanged(object sender, EventArgs e)

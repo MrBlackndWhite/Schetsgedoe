@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Collections.Generic;
-
+using System.Threading;
 
 namespace PaintPoging
 {
@@ -9,6 +9,7 @@ namespace PaintPoging
     {
         private Color ActiveColor { get; } = Color.Gray;
         private Bitmap bmp;
+        private int count = 0;
         public List<PaintingElement> elements = new List<PaintingElement>();
         public PaintingElement CurrentlyDrawing = new PaintingElement(0);
         public Painting(Size s)
@@ -23,7 +24,10 @@ namespace PaintPoging
         public void ElementCompleted(Color color)
         {
             CurrentlyDrawing.color = color;
+            CurrentlyDrawing.priority = count;
+            CurrentlyDrawing.Name = CurrentlyDrawing.Type.ToString() + " " + CurrentlyDrawing.priority.ToString();
             elements.Add(CurrentlyDrawing);
+            count++;
             CurrentlyDrawing = new PaintingElement(0);
         }
 
@@ -41,15 +45,15 @@ namespace PaintPoging
 
         public void Draw(Graphics g)
         {
-            if (elements != null)
+
+            foreach (PaintingElement e in elements)
             {
-                foreach (PaintingElement e in elements)
-                {
-                    e.DrawElement(g);
-                }
-                CurrentlyDrawing.color = this.ActiveColor;
-                CurrentlyDrawing.DrawElement(g);
+                e.DrawElement(g);
             }
+
+            CurrentlyDrawing.color = this.ActiveColor;
+            CurrentlyDrawing.DrawElement(g);
+
         }
 
         public void Clear()
