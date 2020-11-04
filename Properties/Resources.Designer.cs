@@ -63,9 +63,9 @@ namespace plswork.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap circle {
+        internal static System.Drawing.Bitmap cirkel {
             get {
-                object obj = ResourceManager.GetObject("circle", resourceCulture);
+                object obj = ResourceManager.GetObject("cirkel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

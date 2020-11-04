@@ -104,9 +104,9 @@ namespace plswork
             g.DrawRectangle(MaakPen(kwast, 3), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
     }
-        public class CircleTool : TweepuntTool
+        public class CirkelTool : TweepuntTool
     {
-        public override string ToString() { return "circle"; }
+        public override string ToString() { return "cirkel"; }
 
         public override void Bezig(Graphics g, Point p1, Point p2)
         {
