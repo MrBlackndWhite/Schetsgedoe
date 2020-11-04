@@ -13,7 +13,8 @@ namespace PaintPoging
         FillRectangle = 3,
         Text = 4,
         Eraser = 5,
-        Circle = 6
+        Circle = 6,
+        FillCircle = 7
     }
 
     public static class Tools
@@ -27,7 +28,8 @@ namespace PaintPoging
                 new FillRecTool(),
                 new TxTool(),
                 new EraserTool(),
-                new CircleTool()
+                new CircleTool(),
+                new FillCircleTool()
             };
             return tools;
         }
@@ -105,22 +107,22 @@ namespace PaintPoging
         public override void MBDrag(PaintingControl s, Point p)
         {
             s.Refresh();
-            this.Active(s.CreateGraphics(), this.start, p);
+            this.Active(s.CreateGraphics(), this.start, p);//TODO
         }
         public override void MBUp(PaintingControl s, Point p)
         {
             base.MBUp(s, p);
-            this.Finished(s.CreateGraphics(), this.start, p);
+            this.Finished(s.CreateGraphics(), this.start, p);//TODO
             s.Invalidate();
         }
         public override void Letter(PaintingControl s, char c)
         {
         }
-        public abstract void Active(Graphics g, Point p1, Point p2);
+        public abstract PaintingElement Active(Graphics g, Point p1, Point p2);
 
-        public virtual void Finished(Graphics g, Point p1, Point p2)
+        public virtual PaintingElement Finished(Graphics g, Point p1, Point p2)
         {
-            this.Active(g, p1, p2);
+            return this.Active(g, p1, p2);
         }
     }
 
@@ -128,18 +130,18 @@ namespace PaintPoging
     {
         public override string ToString() { return "rect"; }
 
-        public override void Active(Graphics g, Point p1, Point p2)
+        public override PaintingElement Active(Graphics g, Point p1, Point p2)
         {
-            g.DrawRectangle(CreatePen(brush, 3), TwoPTool.CreateRectangle(p1, p2));
+            return new PaintingElement(ToolEnum.Rectangle, p1, p2);
         }
     }
     public class CircleTool : TwoPTool
     {
         public override string ToString() { return "circle"; }
 
-        public override void Active(Graphics g, Point p1, Point p2)
+        public override PaintingElement Active(Graphics g, Point p1, Point p2)
         {
-            g.DrawEllipse(CreatePen(brush, 3), TwoPTool.CreateRectangle(p1, p2));
+            return new PaintingElement(ToolEnum.Circle, p1, p2);
         }
     }
 
@@ -147,9 +149,19 @@ namespace PaintPoging
     {
         public override string ToString() { return "fillrect"; }
 
-        public override void Finished(Graphics g, Point p1, Point p2)
+        public override PaintingElement Finished(Graphics g, Point p1, Point p2)
         {
-            g.FillRectangle(brush, TwoPTool.CreateRectangle(p1, p2));
+            return new PaintingElement(ToolEnum.FillRectangle, p1, p2);
+        }
+    }
+
+    public class FillCircleTool : CircleTool
+    {
+        public override string ToString() { return "fillcircle"; }
+
+        public override PaintingElement Finished(Graphics g, Point p1, Point p2)
+        {
+            return new PaintingElement(ToolEnum.FillCircle, p1, p2);
         }
     }
 
@@ -157,9 +169,9 @@ namespace PaintPoging
     {
         public override string ToString() { return "line"; }
 
-        public override void Active(Graphics g, Point p1, Point p2)
+        public override PaintingElement Active(Graphics g, Point p1, Point p2)
         {
-            g.DrawLine(CreatePen(this.brush, 3), p1, p2);
+            return new PaintingElement(ToolEnum.Line, p1, p2);
         }
     }
 
@@ -178,10 +190,10 @@ namespace PaintPoging
     {
         public override string ToString() { return "eraser"; }
 
-        public override void Active(Graphics g, Point p1, Point p2)
+/*        public override PaintingElement Active(Graphics g, Point p1, Point p2)
         {
             g.DrawLine(CreatePen(Brushes.White, 7), p1, p2);
-        }
+        }*/
     }
 }
 

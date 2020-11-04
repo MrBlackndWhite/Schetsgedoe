@@ -83,6 +83,16 @@ namespace PaintPoging.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fillcircle {
+            get {
+                object obj = ResourceManager.GetObject("fillcircle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fillrect {
             get {
                 object obj = ResourceManager.GetObject("fillrect", resourceCulture);

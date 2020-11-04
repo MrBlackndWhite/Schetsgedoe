@@ -24,9 +24,15 @@ namespace PaintPoging
         {
             this.Parent = parent;
             this.Size = this.Parent.ClientSize;
-            p = new Painting(this.Parent.ClientSize);
+            this.Location = Point.Empty;
+            p = new Painting(this.ClientSize);
             this.Paint += this.Repaint;
             this.Resize += this.SizeChanged;
+        }
+
+        public void AddElement(PaintingElement element)
+        {
+            p.elements.Add(element);
         }
 
         private new void SizeChanged(object sender, EventArgs e)

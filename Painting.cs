@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 
 namespace PaintPoging
@@ -7,6 +8,7 @@ namespace PaintPoging
     public class Painting
     {
         private Bitmap bmp;
+        public List<PaintingElement> elements { get; set; }
         public Painting(Size s)
         {
             bmp = new Bitmap(s.Width, s.Height);
