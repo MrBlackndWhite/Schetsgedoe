@@ -7,8 +7,10 @@ namespace PaintPoging
 {
     public class Painting
     {
+        private Color ActiveColor { get; } = Color.Gray;
         private Bitmap bmp;
-        public List<PaintingElement> elements { get; set; }
+        public List<PaintingElement> elements = new List<PaintingElement>();
+        public PaintingElement CurrentlyDrawing = new PaintingElement(0);
         public Painting(Size s)
         {
             bmp = new Bitmap(s.Width, s.Height);
@@ -16,6 +18,13 @@ namespace PaintPoging
         public Graphics BmpGraphics
         {
             get { return Graphics.FromImage(bmp); }
+        }
+
+        public void ElementCompleted(Color color)
+        {
+            CurrentlyDrawing.color = color;
+            elements.Add(CurrentlyDrawing);
+            CurrentlyDrawing = new PaintingElement(0);
         }
 
         public void SizeChanged(Size s)
@@ -32,13 +41,20 @@ namespace PaintPoging
 
         public void Draw(Graphics g)
         {
-            g.DrawImage(bmp, 0, 0);
+            if (elements != null)
+            {
+                foreach (PaintingElement e in elements)
+                {
+                    e.DrawElement(g);
+                }
+                CurrentlyDrawing.color = this.ActiveColor;
+                CurrentlyDrawing.DrawElement(g);
+            }
         }
 
         public void Clear()
         {
-            Graphics g = Graphics.FromImage(bmp);
-            g.Clear(Color.White);
+            elements.Clear();
 
         }
 

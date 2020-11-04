@@ -35,6 +35,20 @@ namespace PaintPoging
             p.elements.Add(element);
         }
 
+        public void ElementCompleted(Color color)
+        {
+            p.ElementCompleted(color);
+        }
+
+        public void StartPointActive(ToolEnum te, Point p)
+        {
+            this.p.CurrentlyDrawing = new PaintingElement(te, p, p);
+        }
+        public void EndPointActive(Point p2)
+        {
+            this.p.CurrentlyDrawing.points[1] = p2;
+        }
+
         private new void SizeChanged(object sender, EventArgs e)
         {
             p.SizeChanged(this.ClientSize);

@@ -9,6 +9,8 @@ namespace PaintPoging
     public partial class ChildForm : Form
     {
         private PaintingControl pc;
+        private Color currentColor { get; set; } = Color.Red;
+        private ToolEnum currentToolEnum;
         private IPaintTool currenTool;
         private bool isMouseDown = false;
         //private ResourceManager rsm = new ResourceManager("PaintPoging.Properties.Resources",
@@ -42,24 +44,29 @@ namespace PaintPoging
 
         private void Pc_MouseUp(object sender, MouseEventArgs e)
         {
-            currenTool.MBUp(pc, e.Location);
+            pc.ElementCompleted(currentColor);
+            //currenTool.MBUp(pc, e.Location);
             isMouseDown = false;
             Console.WriteLine("mup");
+            pc.Invalidate();
         }
 
         private void Pc_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDown)
             {
-                currenTool.MBDrag(pc, e.Location);
+                pc.EndPointActive(e.Location);
+                //currenTool.MBDrag(pc, e.Location);
                 Console.WriteLine("mdrag");
+                pc.Invalidate();
             }
         }
 
         private void Pc_MouseDown(object sender, MouseEventArgs e)
         {
             isMouseDown = true;
-            currenTool.MBDown(pc, e.Location);
+            pc.StartPointActive(currentToolEnum, e.Location);
+            //currenTool.MBDown(pc, e.Location);
             Console.WriteLine("mdown");
         }
 
@@ -99,6 +106,7 @@ namespace PaintPoging
         {
             ToolStripButton btn = o as ToolStripButton;
             currenTool = tools.ElementAt((int)(ToolEnum)btn.Tag);
+            currentToolEnum = (ToolEnum)btn.Tag;
             foreach (ToolStripButton item in this.TSButtons)
             {
                 item.Checked = false;

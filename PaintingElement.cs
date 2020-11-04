@@ -8,7 +8,7 @@ namespace PaintPoging
     public class PaintingElement
     {
         private ToolEnum Type { get; set; } //type of drawing
-        private Point[] points { get; set; } = new Point[2];
+        public Point[] points { get; set; } = new Point[2];
         public int priority { get; set; } = 0;
         public Color color { get; set; }
         public string Name { get; set; } //name of specified element
@@ -90,6 +90,10 @@ namespace PaintPoging
 
         public void DrawElement(Graphics g)
         {
+            if (this == null)
+            {
+                return;
+            }
             Brush b = new SolidBrush(color);
             Pen p = TwoPTool.CreatePen(b, 3);
             switch (Type)
